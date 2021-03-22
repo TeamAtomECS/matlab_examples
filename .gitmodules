@@ -1,0 +1,6 @@
+[submodule "atomecs"]
+	path = atomecs
+	url = https://github.com/TeamAtomECS/AtomECS.git
+[submodule "+utils"]
+	path = +utils
+	url = https://github.com/TeamAtomECS/matlab
