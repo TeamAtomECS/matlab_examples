@@ -2,10 +2,10 @@
 % Plots a graph showing the output of the zeeman_slower example.
 wd = run_example('1d_mot');
 
-output = read_output(fullfile(wd, 'pos.txt'));
+output = utils.read_output(fullfile(wd, 'pos.txt'));
 position = {output.vec};
 
-output = read_output(fullfile(wd, 'pos.txt'));
+output = utils.read_output(fullfile(wd, 'pos.txt'));
 velocity = {output.vec};
 
 position = cat(3, position{:});

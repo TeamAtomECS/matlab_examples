@@ -44,10 +44,10 @@ saveas(gcf, 'molasses.pdf')
 
 %%
 % Plot scattering rates
-
-output = utils.read_output(fullfile(wd,'scattered.txt'), 'Format', '%f,%f,');
+format = '%f,%f,%f,%f,%f,%f,%f,%f,%f,%f,%f,%f,%f,%f,%f,%f,';
+output = utils.read_output(fullfile(wd,'scattered.txt'), 'Format', format);
 rates = {output.vec};
-rates = cat(3, rates{:});
+rates = cat(3, rates{2:end});
 rates_a = squeeze(rates(:,1,:));
 rates_b = squeeze(rates(:,2,:));
 t = 10*(0:(size(rates,3)-1)); %1us timestep, output every 10
