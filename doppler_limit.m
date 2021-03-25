@@ -14,11 +14,16 @@ kB = 1.38e-23;
 T = (amu * 87 * vSq / kB / 3);
 T = T * 1e6;
 
+% Doppler limit for Rb
+gamma = 6e6 * 2 * pi;
+hb = 6.63e-34 / (2*pi);
+doppler = (hb * gamma / 4) / kB;
+
 clf;
 plot(10*(1:length(T)), T)
 fprintf('Mean T=%.2f uK\n', mean(T))
 hold on
-plot(xlim, [1 1 ] * 144, '--k')
+plot(xlim, [1 1 ] * doppler * 1e6, '--k')
 set(gcf, 'Color', 'w');
 xlabel('$t$ ($\mu$s)', 'interpreter', 'latex');
 ylabel('T ($\mu$K)', 'interpreter', 'latex');
