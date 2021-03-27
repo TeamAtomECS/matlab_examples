@@ -24,6 +24,7 @@ set(get(gca, 'XAxis'), 'TickLabelInterpreter', 'latex');
 set(get(gca, 'YAxis'), 'TickLabelInterpreter', 'latex');
 grid on;
 set(gca, 'GridLineStyle', ':');
+xlim([ 0 1000 ]);
 
 % Render to file
 set(gcf, 'Units', 'centimeters');

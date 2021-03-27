@@ -5,7 +5,7 @@ wd = run_example('1d_mot');
 output = utils.read_output(fullfile(wd, 'pos.txt'));
 position = {output.vec};
 
-output = utils.read_output(fullfile(wd, 'pos.txt'));
+output = utils.read_output(fullfile(wd, 'vel.txt'));
 velocity = {output.vec};
 
 position = cat(3, position{:});
@@ -19,7 +19,7 @@ vz = squeeze(velocity(:,3,:));
 c1 = [ 0.1608 0.5804 0.6980 ];
 c0 = [ 0.0118 0.0196 0.1176 ];
 c = interp1([0; 120], [ c0; c1 ], vz(:,1));
-
+% c(i,:)
 clf;
 for i=1:size(vz,1)
     plot(z(i,:), vz(i,:), 'k', 'Color', c(i,:)); hold on;
