@@ -18,7 +18,7 @@ for i=1:length(detunings)
     fprintf(fid, '%s', jsonencode(params));
     fclose(fid);
     
-    wd = run_example('doppler_sweep');
+    wd = run_example('doppler_limit');
     
     output_v = utils.read_output(fullfile(wd,'vel.txt'));
     velocities = {output_v(:).vec};
