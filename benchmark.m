@@ -50,13 +50,18 @@ set(gcf, 'Position', [ pos(1) pos(2) 9 11 ]);
 clf;
 axes('Units', 'centimeters', 'Position', [ 1.2 4.7 7.5 6 ]);
 
-c1 = [ 0.1608 0.5804 0.6980 ];
+c1 = [ 0.2 0.85 1.0 ];
 c0 = 0*[ 0.0118 0.0196 0.1176 ];
-get_color = @(n) interp1([0; log10(max(thread_atom_numbers))], [ c0; c1 ], log10(n));
+c2 = [0.0830    0.6576    0.8615];
+get_color = @(n) interp1([1; 2; 8], [ c1; c2; c0 ], log10(n), 'linear', true);
+
+% cm = parula(10);
+% norm = @(x, range) (x - min(range)) ./ (max(range)- min(range));
+% get_color = @(n) interp1((length(cm):-1:1)'/length(cm), cm, norm(log10(n), -0.5:6.8));
 
 set(gcf, 'Color', 'w');
 h = [];
-for i=1:size(averaged_results, 1)
+for i=1:1:size(averaged_results, 1)
    h(i) = plot([averaged_results(i,:).threads], 1e6*[averaged_results(i,:).time]./([averaged_results(i,:).atoms].*steps), '.-', 'Color', get_color(averaged_results(i,1).atoms)); hold on;
 end
 xlabel('', 'interpreter', 'latex', 'FontSize', 11);
@@ -65,11 +70,11 @@ ylabel('$\tau$ ($\mu$s) ', 'Interpreter', 'latex', 'FontSize', 11);
 grid on;
 set(gca, 'GridLineStyle', ':');
 xlim([min(thread_numbers) max(thread_numbers)]);
-set(get(gca, 'XAxis'), 'TickLabelInterpreter', 'Latex');
-set(get(gca, 'YAxis'), 'TickLabelInterpreter', 'Latex');
-set(gca, 'YScale', 'log');
-set(gca, 'XTick', []);
-set(gca, 'YScale', 'log');
+set(get(gca, 'XAxis'), 'TickLabelInterpreter', 'Latex', 'FontSize', 10);
+set(get(gca, 'YAxis'), 'TickLabelInterpreter', 'Latex', 'FontSize', 10);
+% set(gca, 'YScale', 'log');
+set(gca, 'XTick', 1:6, 'XTickLabel', {});
+% set(gca, 'YScale', 'log');
 xlim([1 6]);
 labels = arrayfun(@(x) [num2str(x) ' atoms'], thread_atom_numbers, 'UniformOutput', 0);
 selected = [ 1 5 length(labels) ];
@@ -80,17 +85,17 @@ ax2 = axes('Units', 'centimeters', 'Position', [ 1.2 1.2 7.5 3.3 ]);
 f = @(A, p, x) A*(1-p+p./x);
 ft = fittype(f);
 fitResult = fit([averaged_results(end,:).threads]', [averaged_results(end,:).time]', ft);
-plot([averaged_results(end,:).threads]', [averaged_results(end,:).time]'/steps, 'o', 'Color', c1); hold on;
+plot([averaged_results(end,:).threads]', [averaged_results(end,:).time]'/steps, 'o', 'Color', get_color(1e6)); hold on;
 %errorbar([averaged_results(end,:).threads]', [averaged_results(end,:).time]'/steps, [std_results(end,:).time]'/steps, 'o', 'Color', c1); hold on;
 xs = [averaged_results(end,:).threads]';
 xs = linspace(min(xs), max(xs), 1000);
 plot(xs, fitResult(xs)/steps, 'k--'); hold off;
 grid on;
 set(ax2, 'GridLineStyle', ':');
-set(gca, 'XTick', 1:6);
-set(get(ax2, 'XAxis'), 'TickLabelInterpreter', 'Latex');
-set(get(ax2, 'YAxis'), 'TickLabelInterpreter', 'Latex');
-xlabel('number of threads', 'interpreter', 'latex', 'FontSize', 11);
+set(gca, 'XTick', 1:6, 'YTick', [ 0.5, 1.0 ]);
+set(get(ax2, 'XAxis'), 'TickLabelInterpreter', 'Latex', 'FontSize', 10);
+set(get(ax2, 'YAxis'), 'TickLabelInterpreter', 'Latex', 'FontSize', 10);
+xlabel('number of threads, $N_t$', 'interpreter', 'latex', 'FontSize', 11);
 % tau = total wall time per atom, per thread
 ylabel('$T_\textrm{sim} / N_a$ (s) ', 'Interpreter', 'latex', 'FontSize', 11);
 ylim([ 0 1.5 ]);

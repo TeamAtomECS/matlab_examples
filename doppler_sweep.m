@@ -123,7 +123,7 @@ set(get(gca, 'XAxis'), 'TickLabelInterpreter', 'latex');
 set(get(gca, 'YAxis'), 'TickLabelInterpreter', 'latex');
 grid on
 set(gca, 'GridLineStyle', ':');
-ylim([ 120 600 ]);
+ylim([ 0 600 ]);
 box on;
 
 % Plot doppler limit panel
