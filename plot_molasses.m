@@ -45,7 +45,7 @@ saveas(gcf, 'molasses.pdf')
 
 %%
 % Plot scattering rates
-format = '%f,%f,%f,%f,%f,%f,%f,%f,%f,%f,%f,%f,%f,%f,%f,%f,';
+format = '%f,%f,';
 output = utils.read_output(fullfile(wd,'scattered.txt'), 'Format', format);
 rates = {output.vec};
 rates = cat(3, rates{2:end});

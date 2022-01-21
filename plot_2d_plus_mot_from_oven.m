@@ -1,9 +1,9 @@
 %%
 %
-system('cargo run --example 2d_plus_mot_from_oven --release');
+wd = run_example('2d_plus_mot_from_oven');
 %% Load trajectories and plot results.
 %
-output = read_output('pos.txt');
+output = utils.read_output(fullfile(wd, 'pos.txt'));
 position = {output.vec};
 fprintf('Positions loaded.\n')
 

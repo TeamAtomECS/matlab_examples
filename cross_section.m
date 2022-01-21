@@ -5,7 +5,7 @@ wd = run_example('cross_section');
 
 output_v = utils.read_output(fullfile(wd,'vel.txt'));
 vs = output_v(end).vec;
-output_s = utils.read_output(fullfile(wd,'scattered.txt'), 'Format', '%f,%f,%f,%f,%f,%f,%f,%f,%f,%f,%f,%f,%f,%f,%f,%f,');
+output_s = utils.read_output(fullfile(wd,'scattered.txt'), 'Format', '%f,');
 scat = output_s(end).vec;
 
 % Convert velocity to units of Gamma.
